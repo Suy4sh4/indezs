@@ -8,7 +8,7 @@
     /* General Styles */
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #FBF3DF;
+      background-color: #fbf3df00;
       margin: 0;
       padding: 0;
       display: flex;
@@ -226,7 +226,8 @@
       margin-top: 10px;
     }
 
-    .donation-options .donate-button {
+    /* Razorpay Button Styling */
+    .razorpay-button {
       width: 100%;
       padding: 14px;
       background: #6C5CE7;
@@ -239,7 +240,7 @@
       transition: background 0.3s ease, transform 0.2s ease;
     }
 
-    .donation-options .donate-button:hover {
+    .razorpay-button:hover {
       background: #5a4fcf;
       transform: translateY(-2px);
     }
@@ -292,11 +293,11 @@
     }
 
     /* Monthly-specific styles */
-    .form-container.monthly .donate-button {
+    .form-container.monthly .razorpay-button {
       background: #E74C3C;
     }
 
-    .form-container.monthly .donate-button:hover {
+    .form-container.monthly .razorpay-button:hover {
       background: #C0392B;
     }
 
@@ -340,11 +341,6 @@
       .donation-options .name-field button {
         padding: 10px;
         font-size: 12px;
-      }
-
-      .donation-options .donate-button {
-        font-size: 16px;
-        padding: 12px;
       }
 
       .progress-container p {
@@ -394,8 +390,10 @@
         Hey <span id="user-name">Suyash Patil</span>, your donation usage details will be sent to you via email once used by the organization.
       </div>
 
-      <!-- Donate Button -->
-      <button class="donate-button" onclick="handleDonate()">Donate Now</button>
+      <!-- Razorpay Payment Button -->
+      <form>
+        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_PoUL3OCqzQjv3S" async></script>
+      </form>
 
       <!-- Progress Bar -->
       <div class="progress-container">
@@ -428,11 +426,13 @@
         Hey <span id="monthly-user-name">Suyash Patil</span>, your donation usage details will be sent to you via email once used by the organization.
       </div>
 
-      <!-- Donate Button -->
-      <button class="donate-button" onclick="handleMonthlyDonate()">Donate Now</button>
+      <!-- Razorpay Payment Button -->
+      <form>
+        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_PoUL3OCqzQjv3S" async></script>
+      </form>
 
-     <!-- Progress Bar -->
-     <div class="progress-container">
+      <!-- Progress Bar -->
+      <div class="progress-container">
         <p>
           Estimated Project Donation Progress:
           <span class="progress-percentage">46.13%</span>
@@ -441,6 +441,7 @@
           <div class="progress-bar-fill"></div>
         </div>
       </div>
+    </div>
   </div>
 
   <script>
@@ -460,20 +461,6 @@
       const name = document.getElementById('name').value || document.getElementById('monthly-name').value;
       document.getElementById('user-name').textContent = name;
       document.getElementById('monthly-user-name').textContent = name;
-    }
-
-    // Function to handle one-time donation
-    function handleDonate() {
-      const name = document.getElementById('name').value;
-      const purpose = document.getElementById('purpose').value;
-      alert(`Thank you, ${name}! Your one-time donation for ${purpose} has been processed.`);
-    }
-
-    // Function to handle monthly donation
-    function handleMonthlyDonate() {
-      const name = document.getElementById('monthly-name').value;
-      const months = document.getElementById('months').value;
-      alert(`Thank you, ${name}! Your monthly donation for ${months} months has been processed.`);
     }
 
     // Toggle between one-time and monthly donation options
