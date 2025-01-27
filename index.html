@@ -19,36 +19,37 @@
 
     /* Form Container */
     .form-container {
-      width: 450px;
-      height: 550px; /* Fixed height */
+      width: 90%;
+      max-width: 450px;
+      height: 550px; /* Slightly increased height to accommodate progress bar */
       background-color: #fff;
-      box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px; /* Increased and smoother shadow */
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px;
       border-radius: 20px;
       box-sizing: border-box;
-      padding: 40px;
+      padding: 30px;
       text-align: center;
       transition: background-color 0.5s ease;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Align content to the top */
+      justify-content: flex-start;
     }
 
     /* Inline Heading */
     .form-container h2 {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
       color: #2c3e50;
       margin-bottom: 20px;
-      white-space: nowrap; /* Prevents text from wrapping */
-      margin-top: 0; /* Move heading up */
+      white-space: nowrap;
+      margin-top: 0;
     }
 
     /* Switch */
     .switch {
-      --_switch-bg-clr: #FBF3DF; /* Background color matching the theme */
+      --_switch-bg-clr: #FBF3DF;
       --_switch-padding: 4px;
-      --_slider-bg-clr: rgba(108, 92, 231, 0.65); /* Slider color (unchecked) */
-      --_slider-bg-clr-on: rgba(231, 76, 60, 0.65); /* Slider color (checked) */
+      --_slider-bg-clr: rgba(108, 92, 231, 0.65);
+      --_slider-bg-clr-on: rgba(231, 76, 60, 0.65);
       --_slider-txt-clr: #ffffff;
       --_label-padding: 1rem 2rem;
       --_switch-easing: cubic-bezier(0.47, 1.64, 0.41, 0.8);
@@ -83,7 +84,7 @@
       place-content: center;
       transition: opacity 300ms ease-in-out 150ms;
       padding: var(--_label-padding);
-      color: #2c3e50; /* Text color */
+      color: #2c3e50;
       font-weight: 500;
     }
 
@@ -148,17 +149,17 @@
 
     /* Donation Options */
     .donation-options {
-      display: none; /* Hidden by default */
+      display: none;
       flex-direction: column;
       gap: 20px;
       opacity: 0;
       transition: opacity 0.5s ease, transform 0.5s ease;
       transform: translateY(10px);
-      flex: 1; /* Take remaining space */
+      flex: 1;
     }
 
     .donation-options.active {
-      display: flex; /* Show when active */
+      display: flex;
       opacity: 1;
       transform: translateY(0);
     }
@@ -179,6 +180,8 @@
       background: #f9f9f9;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .donation-options input:focus,
@@ -188,28 +191,39 @@
       outline: none;
     }
 
-    .donation-options .suggested-amounts {
+    .donation-options .name-field {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
       gap: 10px;
     }
 
-    .donation-options .suggested-amounts button {
+    .donation-options .name-field input {
       flex: 1;
+      pointer-events: none; /* Disable direct editing */
+    }
+
+    .donation-options .name-field button {
       padding: 12px;
-      background: transparent;
-      color: #6C5CE7;
-      font-size: 16px;
+      background: #6C5CE7;
+      color: #fff;
+      font-size: 14px;
       font-weight: 500;
-      border: 2px dashed #6C5CE7;
+      border: none;
       border-radius: 10px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s ease;
     }
 
-    .donation-options .suggested-amounts button:hover {
-      background: rgba(108, 92, 231, 0.1);
+    .donation-options .name-field button:hover {
+      background: #5a4fcf;
       transform: translateY(-2px);
+    }
+
+    .donation-options .donation-message {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      margin-top: 10px;
     }
 
     .donation-options .donate-button {
@@ -230,6 +244,44 @@
       transform: translateY(-2px);
     }
 
+    /* Progress Bar */
+    .progress-container {
+      margin-top: -15px;
+      text-align: left;
+    }
+
+    .progress-container p {
+      font-size: 14px;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      width: 46%; /* Set to 46% for testing */
+      height: 100%;
+      background: #6C5CE7;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .progress-percentage {
+      font-size: 14px;
+      color: #2c3e50;
+      margin-left: 10px;
+    }
+
     /* Dynamic Box Color */
     .form-container.one-time {
       background-color: #fff;
@@ -248,13 +300,64 @@
       background: #C0392B;
     }
 
-    .form-container.monthly .suggested-amounts button {
-      border-color: #E74C3C;
-      color: #E74C3C;
+    .form-container.monthly .name-field button {
+      background: #E74C3C;
     }
 
-    .form-container.monthly .suggested-amounts button:hover {
-      background: rgba(231, 76, 60, 0.1);
+    .form-container.monthly .name-field button:hover {
+      background: #C0392B;
+    }
+
+    .form-container.monthly .progress-bar-fill {
+      background: #E74C3C;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 480px) {
+      .form-container {
+        height: auto; /* Adjust height for mobile */
+        padding: 20px;
+      }
+
+      .form-container h2 {
+        font-size: 20px;
+      }
+
+      .switch > span {
+        padding: 0.5rem 1rem;
+      }
+
+      .donation-options label {
+        font-size: 14px;
+      }
+
+      .donation-options input,
+      .donation-options select {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .donation-options .name-field button {
+        padding: 10px;
+        font-size: 12px;
+      }
+
+      .donation-options .donate-button {
+        font-size: 16px;
+        padding: 12px;
+      }
+
+      .progress-container p {
+        font-size: 12px;
+      }
+
+      .progress-bar {
+        height: 8px;
+      }
+
+      .progress-percentage {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -271,6 +374,12 @@
 
     <!-- One-Time Donation Options -->
     <div id="one-time-options" class="donation-options active">
+      <label for="name">Your Name:</label>
+      <div class="name-field">
+        <input type="text" id="name" value="Suyash Patil" readonly>
+        <button onclick="editName()">Edit Name</button>
+      </div>
+
       <label for="purpose">Purpose of Donation:</label>
       <select id="purpose">
         <option value="medical">Medical</option>
@@ -280,25 +389,32 @@
         <option value="shelter">Shelter</option>
       </select>
 
-      <label for="amount">Amount (₹):</label>
-      <input type="number" id="amount" placeholder="Enter amount" required>
-
-      <!-- Suggested Amounts -->
-      <div class="suggested-amounts">
-        <button onclick="setAmount(11)">₹11</button>
-        <button onclick="setAmount(51)">₹51</button>
-        <button onclick="setAmount(101)">₹101</button>
-        <button onclick="setAmount(201)">₹201</button>
+      <!-- Donation Message -->
+      <div class="donation-message">
+        Hey <span id="user-name">Suyash Patil</span>, your donation usage details will be sent to you via email once used by the organization.
       </div>
 
-      <!-- Razorpay Payment Button for One-Time Donation -->
-      <form>
-        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_PoTRENTzWQHx3o" async> </script>
-      </form>
+      <!-- Donate Button -->
+      <button class="donate-button" onclick="handleDonate()">Donate Now</button>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <p>Estimated Project Donation Progress:
+            <span class="progress-percentage">46.13%</span></p>
+        <div class="progress-bar">
+          <div class="progress-bar-fill"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Monthly Donation Options -->
     <div id="monthly-options" class="donation-options">
+      <label for="monthly-name">Your Name:</label>
+      <div class="name-field">
+        <input type="text" id="monthly-name" value="Suyash Patil" readonly>
+        <button onclick="editName()">Edit Name</button>
+      </div>
+
       <label for="months">Number of Months:</label>
       <select id="months">
         <option value="1">1 Month</option>
@@ -307,54 +423,78 @@
         <option value="12">12 Months</option>
       </select>
 
-      <label for="monthly-amount">Amount (₹):</label>
-      <input type="number" id="monthly-amount" placeholder="Enter amount" required>
-
-      <!-- Suggested Amounts -->
-      <div class="suggested-amounts">
-        <button onclick="setMonthlyAmount(11)">₹11</button>
-        <button onclick="setMonthlyAmount(51)">₹51</button>
-        <button onclick="setMonthlyAmount(101)">₹101</button>
-        <button onclick="setMonthlyAmount(201)">₹201</button>
+      <!-- Donation Message -->
+      <div class="donation-message">
+        Hey <span id="monthly-user-name">Suyash Patil</span>, your donation usage details will be sent to you via email once used by the organization.
       </div>
 
-      <!-- Razorpay Payment Button for Monthly Donation -->
-      <form>
-        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_PoTRENTzWQHx3o" async> </script>
-      </form>
-    </div>
+      <!-- Donate Button -->
+      <button class="donate-button" onclick="handleMonthlyDonate()">Donate Now</button>
+
+     <!-- Progress Bar -->
+     <div class="progress-container">
+        <p>
+          Estimated Project Donation Progress:
+          <span class="progress-percentage">46.13%</span>
+        </p>
+        <div class="progress-bar">
+          <div class="progress-bar-fill"></div>
+        </div>
+      </div>
   </div>
 
   <script>
-    // Toggle between One-Time and Monthly Donation Options
+    // Function to handle editing the name
+    function editName() {
+      const nameInput = document.getElementById('name') || document.getElementById('monthly-name');
+      nameInput.removeAttribute('readonly');
+      nameInput.focus();
+      nameInput.addEventListener('blur', () => {
+        nameInput.setAttribute('readonly', true);
+        updateUserName();
+      });
+    }
+
+    // Function to update the user name in the message
+    function updateUserName() {
+      const name = document.getElementById('name').value || document.getElementById('monthly-name').value;
+      document.getElementById('user-name').textContent = name;
+      document.getElementById('monthly-user-name').textContent = name;
+    }
+
+    // Function to handle one-time donation
+    function handleDonate() {
+      const name = document.getElementById('name').value;
+      const purpose = document.getElementById('purpose').value;
+      alert(`Thank you, ${name}! Your one-time donation for ${purpose} has been processed.`);
+    }
+
+    // Function to handle monthly donation
+    function handleMonthlyDonate() {
+      const name = document.getElementById('monthly-name').value;
+      const months = document.getElementById('months').value;
+      alert(`Thank you, ${name}! Your monthly donation for ${months} months has been processed.`);
+    }
+
+    // Toggle between one-time and monthly donation options
     const filter = document.getElementById('filter');
+    const formContainer = document.querySelector('.form-container');
     const oneTimeOptions = document.getElementById('one-time-options');
     const monthlyOptions = document.getElementById('monthly-options');
-    const formContainer = document.querySelector('.form-container');
 
     filter.addEventListener('change', () => {
       if (filter.checked) {
-        oneTimeOptions.classList.remove('active');
-        monthlyOptions.classList.add('active');
         formContainer.classList.remove('one-time');
         formContainer.classList.add('monthly');
+        oneTimeOptions.classList.remove('active');
+        monthlyOptions.classList.add('active');
       } else {
-        monthlyOptions.classList.remove('active');
-        oneTimeOptions.classList.add('active');
         formContainer.classList.remove('monthly');
         formContainer.classList.add('one-time');
+        monthlyOptions.classList.remove('active');
+        oneTimeOptions.classList.add('active');
       }
     });
-
-    // Set Suggested Amount for One-Time Donation
-    function setAmount(amount) {
-      document.getElementById('amount').value = amount;
-    }
-
-    // Set Suggested Amount for Monthly Donation
-    function setMonthlyAmount(amount) {
-      document.getElementById('monthly-amount').value = amount;
-    }
   </script>
 </body>
 </html>
